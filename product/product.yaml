@@ -1,0 +1,11 @@
+_ > nanoagent.plugin.v0001.ProductConfig:
+tagline: "Reference Reconcile with a checkable result"
+summary: "Reconcile two signed integer-cent transaction lists by reference while retaining zero-net and one-sided references."
+highlights:
+  - "Works offline with structured inputs"
+  - "Checks the saved artifact as well as the returned result"
+  - "Rejects invalid inputs and protects existing files"
+steps:
+  - "Provide the task data and a new output filename"
+  - "Run the task to generate its ordered results"
+  - "Review the verified result and saved JSON artifact"

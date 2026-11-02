@@ -1,0 +1,27 @@
+_ > nanoagent.plugin.v0001.ManifestConfig:
+id: sz-reference-reconcile
+name: Reference Reconcile
+version: 1.0.0
+status: ready
+spec: nanoagent.plugin/v0001
+
+runtime > nanoagent.plugin.v0001.RuntimeConfig:
+  type: mcp_stdio
+  command: [uv, run, --frozen, python, -m, plugin]
+
+permissions > nanoagent.plugin.v0001.PermissionsConfig:
+  network > nanoagent.plugin.v0001.NetworkConfig:
+    hosts: []
+  filesystem > nanoagent.plugin.v0001.FilesystemConfig:
+    write: [workspace]
+
+tools > dict[contract.Tool, nanoagent.plugin.v0001.ToolConfig]:
+  reconcile_entries:
+    description: "Reconcile two signed integer-cent transaction lists by reference while retaining zero-net and one-sided references."
+tasks > dict[contract.Task, nanoagent.plugin.v0001.TaskConfig]:
+  reconcile-entries:
+    description: "Reconcile two signed integer-cent transaction lists by reference while retaining zero-net and one-sided references."
+    runner: tool
+    tools: [reconcile_entries]
+    reference: null
+    instructions: "Group by exact case-sensitive reference. Keep the union of references, including zero-net groups. Presence reflects entries, not net amount. difference_cents=bank_cents-ledger_cents. Sort by reference. total is the sum of absolute differences. Save canonical JSON with records and total at destination and return the same rows and total with its path."
